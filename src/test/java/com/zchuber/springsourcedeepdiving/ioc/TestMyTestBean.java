@@ -27,5 +27,12 @@ public class TestMyTestBean {
         TestA testBean = (TestA) bf.getBean("testA");
     }
 
+    @Test
+    public void testCircleBySetter(){
+        BeanFactory bf=new XmlBeanFactory(new ClassPathResource("beanFactoryTest.xml"));
+        TestA testA = (TestA) bf.getBean("testA");
+        System.out.println(testA);
+    }
+
 
 }

@@ -2,21 +2,18 @@ package com.zchuber.springsourcedeepdiving.ioc;
 
 public class TestB {
 
-    private TestC testc;
+    private TestC testC;
 
-    public TestB(TestC testC) {
-        this.testc = testc;
-    }
 
     public void b() {
-        testc.c();
+        testC.c();
     }
 
-    public void setTestc(TestC testc) {
-        this.testc = testc;
+    public void setTestC(TestC testc) {
+        this.testC = testc;
     }
 
-    public TestC getTestc() {
-        return testc;
+    public TestC getTestC() {
+        return testC;
     }
 }

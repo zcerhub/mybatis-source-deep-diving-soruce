@@ -10,18 +10,18 @@
 	</bean>
 
 	<bean id="testA"
-		  class="com.zchuber.springsourcedeepdiving.ioc.TestA">
-		<constructor-arg index="0" ref="testB" />
+		  class="com.zchuber.springsourcedeepdiving.ioc.TestA" >
+		<property name="testB" ref="testB"/>
 	</bean>
 
 	<bean id="testB"
 		  class="com.zchuber.springsourcedeepdiving.ioc.TestB">
-		<constructor-arg index="0" ref="testC" />
+		<property name="testC" ref="testC"/>
 	</bean>
 
 	<bean id="testC"
 		  class="com.zchuber.springsourcedeepdiving.ioc.TestC">
-		<constructor-arg index="0" ref="testA" />
+		<property name="testA" ref="testA"/>
 	</bean>
 
 </beans>
