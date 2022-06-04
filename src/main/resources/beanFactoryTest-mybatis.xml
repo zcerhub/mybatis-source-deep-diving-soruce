@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        					 http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://192.168.152.5:3306/biyi_test?allowPublicKeyRetrieval=true"/>
+		<property name="username" value="root"/>
+		<property name="password" value="v3imYJ2@yL6Aq6Tu"/>
+		<property name="initialSize" value="1" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+		<property name="configLocation" value="classpath:mybatis-config-spring.xml"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+<!--	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+		<property name="mapperInterface" value="com.zchuber.springsourcedeepdiving.mybatis.UserMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>-->
+
+	<bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+<!--		<property name="basePackage" value="com.zchuber.springsourcedeepdiving.mybatis"/>-->
+		<property name="basePackage" value="${basePackage}"/>
+		<property name="processPropertyPlaceHolders" value="true"/>
+	</bean>
+
+	<bean id="mesHandler" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>test.properties</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

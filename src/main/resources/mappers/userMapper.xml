@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mybatis TransactionDao mapper configuration -->
+<mapper namespace="com.zchuber.springsourcedeepdiving.mybatis.UserMapper">
+
+    <!-- flushCache to db configuration -->
+    <insert id="insertUser" parameterType="User" >
+        INSERT INTO user
+        (name, age)
+        VALUES (#{name}, #{age})
+    </insert>
+
+    <!-- in the examples with TransactionDao try useCache=false in this case cache won't be used and each time query the db-->
+    <select id="getUser" resultType="User" parameterType="java.lang.Integer" >
+        SELECT * FROM user where id=#{id}
+    </select>
+
+
+
+</mapper>

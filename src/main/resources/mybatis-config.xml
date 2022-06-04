@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration> 
+    <!-- 全局参数 --> 
+	<settings>
+		<!-- 设置但JDBC类型为空时,某些驱动程序要指定值,default:OTHER -->
+		<setting name="jdbcTypeForNull" value="NULL"/> 
+	</settings>
+
+	<typeAliases>
+		<typeAlias  alias="User" type="com.zchuber.springsourcedeepdiving.mybatis.User"/>
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager  type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://192.168.152.5:3306/biyi_test?allowPublicKeyRetrieval=true"/>
+				<property name="username" value="root"/>
+				<property name="password" value="v3imYJ2@yL6Aq6Tu"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="mappers/userMapper.xml"/>
+	</mappers>
+
+</configuration>
