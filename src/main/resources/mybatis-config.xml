@@ -4,13 +4,21 @@
     <!-- 全局参数 --> 
 	<settings>
 		<!-- 设置但JDBC类型为空时,某些驱动程序要指定值,default:OTHER -->
-		<setting name="jdbcTypeForNull" value="NULL"/> 
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="cacheEnabled" value="true"/>
+		<setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 
-	<typeAliases>
-		<typeAlias  alias="User" type="com.zchuber.springsourcedeepdiving.mybatis.User"/>
-	</typeAliases>
 
+	<plugins>
+		<plugin interceptor="com.zchuber.mybatissourcedeepdiving.ExamplePlugin">
+			<property name="someProperty" value="100"/>
+		</plugin>
+		<plugin interceptor="com.zchuber.mybatissourcedeepdiving.SlowSqlInteceptor">
+			<property name="limitSeconds" value="0"/>
+		</plugin>
+	</plugins>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager  type="jdbc" />
@@ -25,6 +33,11 @@
 
 	<mappers>
 		<mapper resource="mappers/userMapper.xml"/>
+<!--		<mapper url="file:///D:\code\mybatis-source-deep-diving\src\main\resources"/>-->
+<!--		<mapper class="com.zchuber.mybatissourcedeepdiving.UserMapper"/>-->
+<!--		<package name="com.zchuber.mybatissourcedeepdiving" />-->
 	</mappers>
+	
+
 
 </configuration>

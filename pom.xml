@@ -2,50 +2,40 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zchuber</groupId>
-    <artifactId>spring-source-deep-diving</artifactId>
+    <artifactId>mybatis-source-deep-diving</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-source-deep-diving</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <name>mybatis-source-deep-diving</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <spring.version>5.2.1.RELEASE</spring.version>
     </properties>
 
     <dependencies>
-        <!-- Dependency for Spring Core -->
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.6</version>
         </dependency>
 
-        <!-- Dependency for Spring Context -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.8.9</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-            <version>1.8.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.7.4</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->

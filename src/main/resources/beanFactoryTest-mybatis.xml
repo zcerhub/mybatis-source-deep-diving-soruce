@@ -22,7 +22,7 @@
 	</bean>
 
 <!--	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
-		<property name="mapperInterface" value="com.zchuber.springsourcedeepdiving.mybatis.UserMapper"/>
+		<property name="mapperInterface" value="UserMapper"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>-->
 

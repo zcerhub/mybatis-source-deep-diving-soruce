@@ -2,20 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- mybatis TransactionDao mapper configuration -->
-<mapper namespace="com.zchuber.springsourcedeepdiving.mybatis.UserMapper">
+<mapper namespace="com.zchuber.mybatissourcedeepdiving.UserMapper" >
 
-    <!-- flushCache to db configuration -->
-    <insert id="insertUser" parameterType="User" >
-        INSERT INTO user
-        (name, age)
-        VALUES (#{name}, #{age})
-    </insert>
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
 
-    <!-- in the examples with TransactionDao try useCache=false in this case cache won't be used and each time query the db-->
-    <select id="getUser" resultType="User" parameterType="java.lang.Integer" >
-        SELECT * FROM user where id=#{id}
+    <sql id="userAllField">
+        id,create_time,name,password,phone,nick_name
+    </sql>
+
+    <select id="listAllUser" resultType="com.zchuber.mybatissourcedeepdiving.UserEntity" fetchSize="100" timeout="10" useCache="true" flushCache="false">
+        select
+        <include refid="userAllField" />
+        from user
     </select>
 
+    <select id="getUserByEntity" resultType="com.zchuber.mybatissourcedeepdiving.UserEntity">
+        select
+        <include refid="userAllField"/>
+        from user
+        <where>
+            <if test="id != null">
+                AND id= #{id}
+            </if>
+            <if test="name != null">
+                AND name= #{name}
+            </if>
+            <if test="phone != null">
+                AND phone= #{phone}
+            </if>
+        </where>
+    </select>
 
+<!--
+    <select id="getUserByEntity" resultType="com.zchuber.mybatissourcedeepdiving.UserEntity">
+        select
+        <include refid="userAllField"/>
+        from user
+        <trim prefix="WHERE" prefixOverrides="AND  | OR">
+            <if test="id != null">
+                id= #{id}
+            </if>
+            <if test="name != null">
+                AND name= #{name}
+            </if>
+        </trim>
+    </select>
+-->
+
+
+
+    <select id="getUserInfo" resultType="com.zchuber.mybatissourcedeepdiving.UserEntity">
+        select
+        <include refid="userAllField" />
+        from user where 1=1
+        <choose>
+            <when test="id != null">
+                AND id = #{id}
+            </when>
+            <when test="name != null">
+                AND name = #{name}
+            </when>
+            <otherwise>
+                AND phone is not null
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getUserByPhone" resultType="com.zchuber.mybatissourcedeepdiving.UserEntity" >
+        select
+        <include refid="userAllField" />
+        from user
+        where phone in
+        <foreach collection="phones" item="phone" index="index" open="(" separator="," close=")">
+            #{phone}
+        </foreach>
+    </select>
 
 </mapper>
